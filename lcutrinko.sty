@@ -1,0 +1,51 @@
+\ProvidesPackage{lcutrinko}
+
+%% lcutrinko.sty
+% ver 1.0 orenfant
+% 作成者の専攻の輪講発表資料に役立ついろいろをぶちこんだ
+
+%% 注意事項
+% 以下のマクロは基本的にjsシリーズやその拡張のzxjsclsなどのドキュメントクラスで使用することを想定しているので，それ以外のドキュメントクラスで不具合がでたら自分で解決してね．
+
+%% 使用するパッケージを読み込み
+% 以下のパッケージはこちらで読み込むので重複して読み込まないように注意
+\usepackage{multicol}
+
+%% 変数定義
+% いくつかの変数を定義
+%\def\supervisor#1{\gdef\@supervisor{#1}} % 提出論文の表紙の指導教員
+\def\laboratory#1{\gdef\@laboratory{#1}} % 所属研究室 or 指導教員
+\def\rinkotype#1{\gdef\@rinkotype{#1}}   % 「調査輪講発表資料」とかそういうタイプをかくところ
+
+%% キャプションを変更
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Table }
+
+%% 輪講資料のためのタイトル
+% ver1.0: 26 Apr 1991 by shisei
+% をもとに改作
+
+\newcommand\dendentitle{
+  \null
+  \newlength \dendenwidth
+  \dendenwidth = -2ex
+  \advance \dendenwidth by \textwidth
+  \begin{center}
+    \framebox[\textwidth]{
+      \parbox{\dendenwidth}
+      {
+        \@rinkotype \hfill \@date \ \\ 
+        \parbox{\dendenwidth}{
+          \vskip 1ex
+          \centering {\Large \bf \@title \par} 
+        }
+        \vskip 2ex 
+        \@laboratory \hfill \@author \
+      }
+    }
+  \end{center}
+}
+
+\renewcommand\@maketitle{
+  \twocolumn[\dendentitle]
+}
