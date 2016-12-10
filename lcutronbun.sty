@@ -1,0 +1,27 @@
+\ProvidesPackage{lcutronbun}
+
+
+\def\supervisor#1{\gdef\@supervisor{#1}} % 提出論文の表紙の指導教員
+
+\newcommand\finaltitle[1]{
+  \thispagestyle{empty}
+
+  \ 
+  \vspace{10zw}
+  \begin{center}
+    \fontsize{48pt}{24.88pt}\selectfont
+    %\underline{{卒業論文}}\\
+    \noindent \textbf{卒業論文}\\
+    \fontsize{20.74pt}{24.88pt}\selectfont
+    \vspace{1zw}
+    \@title\\
+    \vspace{3zw}
+    \@date 提出 \\
+    \vspace{1zw}
+    指導教員\hspace{1zw}\@supervisor \\
+    \vspace{1zw}
+    \@author
+  \end{center}
+  \normalsize
+  \newpage
+}
