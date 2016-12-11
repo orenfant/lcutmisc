@@ -1,24 +1,42 @@
 \ProvidesPackage{lcutronbun}
 
+% 「指導教員」というフィールドを変更するとき（任意）
+\gdef\@supervisorfield{指導教員}
+\def\supervisorfield#1{\gdef\@supervisorfield{#1}}
 
-\def\supervisor#1{\gdef\@supervisor{#1}} % 提出論文の表紙の指導教員
+% 指導教員筆頭(必須)
+\def\mainsupervisor#1{\gdef\@mainsupervisor{#1}}
+
+% その他の指導教員(任意)
+\gdef\@subsupervisor{}
+\def\subsupervisor#1{\gdef\@subsupervisor{#1}}
+
+% 論文のタイプ デフォルトは「卒業論文」
+\gdef\@ronbun{卒業論文}
+\def\ronbun#1{\gdef\@ronbun{#1}}
 
 \newcommand\finaltitle[1]{
   \thispagestyle{empty}
 
   \ 
-  \vspace{10zw}
+  \vspace{40truemm}
   \begin{center}
     \fontsize{48pt}{24.88pt}\selectfont
-    %\underline{{卒業論文}}\\
-    \noindent \textbf{卒業論文}\\
+    \noindent \textbf{\@ronbun}\\
     \fontsize{20.74pt}{24.88pt}\selectfont
     \vspace{1zw}
     \@title\\
     \vspace{3zw}
     \@date 提出 \\
     \vspace{1zw}
-    指導教員\hspace{1zw}\@supervisor \\
+    \newlength{\svboxlen}
+    \newlength{\mainsvlen}
+    \settowidth{\mainsvlen}{\@mainsupervisor}
+    \newlength{\subsvlen}
+    \settowidth{\subsvlen}{\@subsupervisor}
+    \ifdim \mainsvlen<\subsvlen \svboxlen=\subsvlen \else \svboxlen=\mainsvlen \fi
+    \ifdim \subsvlen=0pt \gdef\truesubsupervisor{} \else \gdef\truesubsupervisor{\\\@subsupervisor} \fi
+    \@supervisorfield\hspace{1zw}\parbox[t]{\svboxlen}{\@mainsupervisor\truesubsupervisor} \\
     \vspace{1zw}
     \@author
   \end{center}
