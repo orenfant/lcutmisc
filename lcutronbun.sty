@@ -21,7 +21,7 @@
 \gdef\@ronbun{卒業論文}
 \def\ronbun#1{\gdef\@ronbun{#1}}
 
-\newcommand\finaltitle[1]{
+\newcommand\finaltitle{
   \thispagestyle{empty}
   \newgeometry{top=10truemm,bottom=10truemm,left=10truemm,right=10truemm}
 
@@ -30,7 +30,6 @@
   \begin{center}
     \fontsize{72pt}{0pt}\selectfont
     \noindent \@ronbun\\
-    % \fontsize{20.74pt}{24.88pt}\selectfont
     \fontsize{28pt}{32pt}\selectfont
     \vspace{15truemm}
     \@title\\
@@ -44,7 +43,7 @@
     \settowidth{\subsvlen}{\@subsupervisor}
     \ifdim \mainsvlen<\subsvlen \svboxlen=\subsvlen \else \svboxlen=\mainsvlen \fi
     \ifdim \subsvlen=0pt \gdef\truesubsupervisor{} \else \gdef\truesubsupervisor{\\\@subsupervisor} \fi
-    \@supervisorfield\hspace{1zw}\parbox[t]{\svboxlen}{\@mainsupervisor\truesubsupervisor} \\
+    \@supervisorfield\hspace{20truemm}\parbox[t]{\svboxlen}{\@mainsupervisor\truesubsupervisor} \\
     \vspace{15truemm}
     \@department\\
     \vspace{15truemm}
