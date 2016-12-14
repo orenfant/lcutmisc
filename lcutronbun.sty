@@ -7,6 +7,12 @@
 % 指導教員筆頭(必須)
 \def\mainsupervisor#1{\gdef\@mainsupervisor{#1}}
 
+% 所属学科（必須）
+\def\department#1{\gdef\@department{#1}}
+
+% 学籍番号（必須）
+\def\idnumber#1{\gdef\@idnumber{#1}}
+
 % その他の指導教員(任意)
 \gdef\@subsupervisor{}
 \def\subsupervisor#1{\gdef\@subsupervisor{#1}}
@@ -17,18 +23,20 @@
 
 \newcommand\finaltitle[1]{
   \thispagestyle{empty}
+  \newgeometry{top=10truemm,bottom=10truemm,left=10truemm,right=10truemm}
 
   \ 
-  \vspace{40truemm}
+  \vspace{35truemm}
   \begin{center}
-    \fontsize{48pt}{24.88pt}\selectfont
-    \noindent \textbf{\@ronbun}\\
-    \fontsize{20.74pt}{24.88pt}\selectfont
-    \vspace{1zw}
+    \fontsize{72pt}{0pt}\selectfont
+    \noindent \@ronbun\\
+    % \fontsize{20.74pt}{24.88pt}\selectfont
+    \fontsize{28pt}{32pt}\selectfont
+    \vspace{15truemm}
     \@title\\
-    \vspace{3zw}
-    \@date 提出 \\
-    \vspace{1zw}
+    \vspace{15truemm}
+    \@date\\
+    \vspace{25truemm}
     \newlength{\svboxlen}
     \newlength{\mainsvlen}
     \settowidth{\mainsvlen}{\@mainsupervisor}
@@ -37,9 +45,12 @@
     \ifdim \mainsvlen<\subsvlen \svboxlen=\subsvlen \else \svboxlen=\mainsvlen \fi
     \ifdim \subsvlen=0pt \gdef\truesubsupervisor{} \else \gdef\truesubsupervisor{\\\@subsupervisor} \fi
     \@supervisorfield\hspace{1zw}\parbox[t]{\svboxlen}{\@mainsupervisor\truesubsupervisor} \\
-    \vspace{1zw}
-    \@author
+    \vspace{15truemm}
+    \@department\\
+    \vspace{15truemm}
+    \@idnumber\hspace{20truemm}\@author
   \end{center}
   \normalsize
   \newpage
+  \restoregeometry
 }
