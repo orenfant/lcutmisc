@@ -1,5 +1,10 @@
 \ProvidesPackage{lcutronbun}
 
+%% lcutronbun.sty
+% ver 1.0 by orenfant
+% 学部の卒業論文の表紙を出力するためだけのパッケージ
+% 使い方は README.md を読むか，このファイルを読んで感じること．
+
 % 「指導教員」というフィールドを変更するとき（任意）
 \gdef\@supervisorfield{指導教員}
 \def\supervisorfield#1{\gdef\@supervisorfield{#1}}
@@ -21,7 +26,7 @@
 \gdef\@ronbun{卒業論文}
 \def\ronbun#1{\gdef\@ronbun{#1}}
 
-\newcommand\finaltitle{
+\renewcommand\@maketitle{
   \thispagestyle{empty}
   \newgeometry{top=10truemm,bottom=10truemm,left=10truemm,right=10truemm}
 
