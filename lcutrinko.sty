@@ -3,6 +3,8 @@
 %% lcutrinko.sty
 % ver 1.0 orenfant
 % 作成者の専攻の輪講発表資料に役立ついろいろをぶちこんだ
+% ver 1.1 orenfant 2016-12-20
+% dendentitleの内部コマンドを現代的なLaTeXコマンドで置き換えた
 
 %% 注意事項
 % 以下のマクロは基本的にjsシリーズやその拡張のzxjsclsなどのドキュメントクラスで使用することを想定しているので，それ以外のドキュメントクラスで不具合がでたら自分で解決してね．
@@ -23,24 +25,24 @@
 
 %% 輪講資料のためのタイトル
 % ver1.0: 26 Apr 1991 by shisei
-% をもとに改作
+% をもとにLaTeXのコマンドを使用して，可読性を高めるように改作
 
 \newcommand\dendentitle{
-  \null
   \newlength \dendenwidth
-  \dendenwidth = -2ex
+  \dendenwidth = -1em
   \advance \dendenwidth by \textwidth
   \begin{center}
     \framebox[\textwidth]{
       \parbox{\dendenwidth}
       {
-        \@rinkotype \hfill \@date \ \\ 
+        \@rinkotype \hfill \@date \\ 
         \parbox{\dendenwidth}{
-          \vskip 1ex
-          \centering {\Large \bf \@title \par} 
+          \begin{center}
+            \Large
+            \textbf{\@title}
+          \end{center}
         }
-        \vskip 2ex 
-        \@laboratory \hfill \@author \
+        \@laboratory \hfill \@author
       }
     }
   \end{center}
