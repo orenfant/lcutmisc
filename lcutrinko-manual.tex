@@ -1,0 +1,108 @@
+\documentclass[uplatex,a4paper]{jsarticle}
+\usepackage{metalogo}
+
+\begin{document}
+
+\title{lcutrinkoパッケージマニュアル Ver.1.3}
+\date{2017年4月17日}
+\author{金子隆佐}
+
+\maketitle
+
+\begin{abstract}
+  Ver.1.3にしてマニュアルを書き始める．解説すべきことは多くないが，自分のためのメモも多分に含んでいる．
+\end{abstract}
+
+\section{想定する用途}
+
+電気系の大学院輪講の配布資料でよく見るスタイルの文書を作成するための{\LaTeX}パッケージです．\verb|\dendentitle|という命令を追加し，またいくつかの有用な書き換えを行います．
+
+\section{動作を確認した環境}
+
+以下の{\LaTeX}エンジンとドキュメントクラスの組合せで動作を確認しました．基本的に\texttt{article}系統での使用を前提にしているため，\texttt{jsbook}とか\texttt{jsreport}での動作は未確認です\footnote{\texttt{jarticle}なども未確認ですが，もし使っている人がいたら\texttt{jsarticle}に移行することを強くお勧めします．}．なお，plain{\TeX}での使用はまったく想定していませんし動きません．
+\begin{itemize}
+\item (u){p\LaTeX}と\texttt{jsarticle}，\texttt{bxjsarticle}
+\item {\XeLaTeX}と\texttt{bxjsarticle}
+\item {\LuaLaTeX}と\texttt{ltjsarticle}，\texttt{bxjsarticle}
+\end{itemize}
+
+また以下の各種パラメータ指定で欧文用エンジンが扱えない文字を使用せず，英語のみで執筆する場合でも使用できます．\texttt{article}ドキュメントクラスと本パッケージの組み合わせが以下のエンジンの上で動作することは確認しています．
+\begin{itemize}
+\item {\LaTeXe}
+\item {pdf\LaTeX}
+\item {\XeLaTeX}
+\item {LuaLaTeX}
+\end{itemize}
+
+\section{基本的な使い方}
+
+使用例を添付しているのでそちらも参照してください．
+
+プリアンブルで本パッケージを
+\begin{verbatim}
+\usepackage{lcutrinko}
+\end{verbatim}
+という風に読み込みます．特にオプションはありません．
+
+通常の\texttt{jsarticle}などと同様に，まず
+\begin{itemize}
+\item \texttt{{\textbackslash}title\{題目\}}
+\item \texttt{{\textbackslash}date\{日付\}}
+\item \texttt{{\textbackslash}author\{氏名\}}
+\end{itemize}
+を指定し，加えて
+\begin{itemize}
+\item \texttt{{\textbackslash}rinkotype\{\}}
+\item \texttt{{\textbackslash}laboratory}\{\}
+\end{itemize}
+も指定します．\verb|\rinkotype|は「調査輪講資料」とか「成果輪講資料」の種別を指定し，\verb|\laboratory|は研究室名や指導教員名を指定します．これらの命令の場所は\verb|\dendentitle|の前であればどこでも良いです．
+
+これらを指定したうえで\verb|\dendentitle|を実行するとページ上部に輪講資料のような箱が出力され，これ以降の文章は二段組みになります．
+
+\section{その他の機能}
+
+\subsection{見出し等の表示の変更}
+
+大学院輪講で求められる形式に合わせて次の表示の変更を行っています．
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}[h]{r|cc}
+                     & 変更前 & 変更後 \\ \hline
+    図のキャプション & 図     & Fig.\\
+    表のキャプション & 表     & Table\\
+    抄録見出し       & 抄録   & Abstract
+  \end{tabular}
+\end{table}
+
+\subsection{題目のフォント変更}
+
+\verb|\dendentitle|で出力される題目（タイトル）のフォントはデフォルトで\textbf{bfseries}\footnote{標準的な日本語{\LaTeX}環境においては日本語はゴシック体標準ウェイト，欧文はセリフ体の太字ウェイトとなるはずです．}になっています．これをたとえばサンセリフ体（ゴシック体）に変更したい場合は
+\begin{verbatim}
+\renewcommand{\dendentitlefont}{\sffamily}
+\end{verbatim}
+のように\verb|\dendentitlefont|を上書きしてください．
+
+\section{更新履歴}
+
+\subsection*{Version 1.3 (2017-04-17)}
+\begin{itemize}
+\item multicolパッケージはよく考えたら不必要だったので消す
+\item \verb|\maketitle|を上書きするのをやめて独立した\verb|\dendentitle|とする
+\item 抄録の見出しも英語(Abstract)にする
+\item 英語と日本語それぞれの例を附け加える
+\item タイトルのフォントを変更可能にする
+\end{itemize}
+
+\subsection*{Version 1.2 (2017-02-03)}
+\verb|\@maketitle|を上書きしてしまっていたのを修正
+
+
+\subsection*{Version 1.1 (2016-12-20)}
+\verb|\dendentitle|の内部コマンドを現代的なLaTeXコマンドで置き換えた
+
+\subsection*{Version 1.0 (2016-12-09)}
+暫定的な完成版
+
+
+\end{document}

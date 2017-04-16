@@ -3,43 +3,52 @@
 %% lcutrinko.sty
 % ver 1.0 orenfant
 % 作成者の専攻の輪講発表資料に役立ついろいろをぶちこんだ
+% --------------------
 % ver 1.1 orenfant 2016-12-20
 % dendentitleの内部コマンドを現代的なLaTeXコマンドで置き換えた
+% --------------------
+% ver 1.2 orenfant 2017-04-16
+% multicolパッケージはよく考えたら不必要だったので消す
+% \maketitleを上書きするのをやめて独立した\dendentitleとする
+% 抄録の見出しも英語(Abstract)にする
+% 英語と日本語それぞれの例を附け加える
+% タイトルのフォントを変更可能にする
 
 %% 注意事項
 % 以下のマクロは基本的にjsシリーズやその拡張のzxjsclsなどのドキュメントクラスで使用することを想定しているので，それ以外のドキュメントクラスで不具合がでたら自分で解決してね．
 
-%% 使用するパッケージを読み込み
-% 以下のパッケージはこちらで読み込むので重複して読み込まないように注意
-\usepackage{multicol}
-
 %% 変数定義
 % いくつかの変数を定義
-%\def\supervisor#1{\gdef\@supervisor{#1}} % 提出論文の表紙の指導教員
 \def\laboratory#1{\gdef\@laboratory{#1}} % 所属研究室 or 指導教員
 \def\rinkotype#1{\gdef\@rinkotype{#1}}   % 「調査輪講発表資料」とかそういうタイプをかくところ
 
-%% キャプションを変更
+%% キャプションと抄録見出しを変更
 \renewcommand{\figurename}{Fig.}
 \renewcommand{\tablename}{Table }
+\renewcommand{\abstractname}{Abstract}
+
+% \maketitleを無効化 2017.04.16追加
+% （必ずしも必要ないがどうもこうしないと二段組でabstract環境が出てこなくなる）
+\global\let\maketitle\relax
+
+% タイトルのフォント．デフォルトはbfseries
+\newcommand{\dendentitlefont}{\bfseries}
 
 %% 輪講資料のためのタイトル
 % ver1.0: 26 Apr 1991 by shisei
 % をもとにLaTeXのコマンドを使用して，可読性を高めるように改作
 
-\newcommand\dendentitle{
+\newcommand\@dendentitle{
   \newlength \dendenwidth
   \dendenwidth = -1em
   \advance \dendenwidth by \textwidth
   \begin{center}
-    \framebox[\textwidth]{
-      \parbox{\dendenwidth}
-      {
+    \framebox[\textwidth]{%
+      \parbox{\dendenwidth}{%
         \@rinkotype \hfill \@date \\ 
         \parbox{\dendenwidth}{
           \begin{center}
-            \Large
-            \textbf{\@title}
+            \Large{\dendentitlefont\@title}
           \end{center}
         }
         \@laboratory \hfill \@author
@@ -48,6 +57,6 @@
   \end{center}
 }
 
-\renewcommand\maketitle{
-  \twocolumn[\dendentitle]
+\newcommand\dendentitle{
+  \twocolumn[\@dendentitle]
 }
