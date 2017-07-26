@@ -23,13 +23,13 @@
 \def\rinkotype#1{\gdef\@rinkotype{#1}}   % 「調査輪講発表資料」とかそういうタイプをかくところ
 
 %% キャプションと抄録見出しを変更
-\renewcommand{\figurename}{Fig.}
-\renewcommand{\tablename}{Table }
+\renewcommand{\figurename}{Fig.~}
+\renewcommand{\tablename}{Table~}
 \renewcommand{\abstractname}{Abstract}
 
 % \maketitleを無効化 2017.04.16追加
 % （必ずしも必要ないがどうもこうしないと二段組でabstract環境が出てこなくなる）
-\global\let\maketitle\relax
+% \global\let\maketitle\relax
 
 % タイトルのフォント．デフォルトはbfseries
 \newcommand{\dendentitlefont}{\bfseries}
@@ -55,6 +55,7 @@
       }
     }
   \end{center}
+  \global\let\maketitle\relax % 上で書いていたのがうまくいかなかったのでここにもってきた
 }
 
 \newcommand\dendentitle{
